@@ -16,8 +16,6 @@ namespace WebApp
         {
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            // Register global filter
-            //GlobalFilters.Filters.Add(new DemoFilterAttribute());
             RegisterWebApiFilters(GlobalConfiguration.Configuration.Filters);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

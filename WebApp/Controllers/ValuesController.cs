@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using WebApp.Filters;
@@ -17,31 +18,40 @@ namespace WebApp.Controllers
     {
         // GET api/values
         /*[DemoFilter]*/
-        public IEnumerable<string> Get()
+        public HttpResponseMessage Get()
         {
-            return new string[] { "value1", "value2" };
+            var response = Request.CreateResponse(HttpStatusCode.OK, new[] { "value1", "value2" });
+            return response;
         }
 
         // GET api/values/5
-        public string Get(int id)
+        public HttpResponseMessage Get(int id)
         {
-            return "value";
+            var response = Request.CreateResponse(HttpStatusCode.OK, "value");
+            response.Content = new StringContent("hello", Encoding.Unicode);
+            return response;
         }
 
         // POST api/values
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Post([FromBody]string value)
         {
             Debug.WriteLine("value: " + value);
+            var response = Request.CreateResponse(HttpStatusCode.Created);
+            return response;
         }
 
         // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
+        public HttpResponseMessage Put(int id, [FromBody]string value)
         {
+            var response = Request.CreateResponse(HttpStatusCode.OK);
+            return response;
         }
 
         // DELETE api/values/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
+            var response = Request.CreateResponse(HttpStatusCode.OK);
+            return response;
         }
     }
 }
