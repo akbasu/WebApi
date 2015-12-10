@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using WebApp.Filters;
@@ -18,40 +19,42 @@ namespace WebApp.Controllers
     {
         // GET api/values
         /*[DemoFilter]*/
-        public HttpResponseMessage Get()
+        public async Task<IHttpActionResult> Get()
         {
-            var response = Request.CreateResponse(HttpStatusCode.OK, new[] { "value1", "value2" });
-            return response;
+            var strings = new List<string> { "value1", "value2" };
+            return  await Task.Run(() => Ok(strings));
         }
 
         // GET api/values/5
-        public HttpResponseMessage Get(int id)
+        [HttpGet]
+        [Route("api/values/{id}", Name = "GetValueById")]
+        public async Task<IHttpActionResult> Get(int id)
         {
-            var response = Request.CreateResponse(HttpStatusCode.OK, "value");
-            response.Content = new StringContent("hello", Encoding.Unicode);
-            return response;
+            return await Task.Run(() => Ok("value"));
         }
 
         // POST api/values
-        public HttpResponseMessage Post([FromBody]string value)
+        public async Task<IHttpActionResult> Post([FromBody]string value)
         {
             Debug.WriteLine("value: " + value);
-            var response = Request.CreateResponse(HttpStatusCode.Created);
-            return response;
+            return await Task.Run(() => CreatedAtRoute("GetValueById", new { id = 1 }, value));
         }
 
         // PUT api/values/5
-        public HttpResponseMessage Put(int id, [FromBody]string value)
+        [HttpPut]
+        [Route("api/values/{id}", Name = "PutValueById")]
+        public async Task<IHttpActionResult> Put(int id, [FromBody]string value)
         {
-            var response = Request.CreateResponse(HttpStatusCode.OK);
-            return response;
+            return await Task.Run(() => Ok());
+            //return await Task.Run(() => BadRequest());
         }
 
         // DELETE api/values/5
-        public HttpResponseMessage Delete(int id)
+        [HttpDelete]
+        [Route("api/values/{id}", Name = "DeleteValueById")]
+        public async Task<IHttpActionResult> Delete(int id)
         {
-            var response = Request.CreateResponse(HttpStatusCode.OK);
-            return response;
+            return await Task.Run(() => Ok());
         }
     }
 }
