@@ -28,18 +28,33 @@ namespace WebApp.Filters
 
             if (actionContext.Request.Method != HttpMethod.Get)
             {
+                var appResponse = new AppResponse
+                {
+                    Error = new AppError()
+                    {
+                        Code = ApplicationErrors.InvalidDemoOperation,
+                        Message = Resources.ResourceManager.GetString("InvalidDemoOperationMessage")
+                    }
+                };
                 actionContext.Response = actionContext.Request.CreateResponse(
                     HttpStatusCode.Accepted,
-                    new
-                    {
-                        errorCode = ApplicationErrors.InvalidDemoOperation, // Application error codes to help the UI workflow
-                        errorMessage = Resources.ResourceManager.GetString("InvalidDemoOperationMessage")
-                    },
+                    appResponse,
                     actionContext.ControllerContext.Configuration.Formatters.JsonFormatter);
             }
 
             base.OnActionExecuting(actionContext);
         }
+    }
+
+    public class AppResponse
+    {
+        public AppError  Error { get; set; }
+    }
+
+    public class AppError
+    {
+        public ApplicationErrors Code { get; set; }
+        public string Message { get; set; }
     }
 
     public enum ApplicationErrors
