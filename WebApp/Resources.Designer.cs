@@ -61,7 +61,7 @@ namespace WebApp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This operation isn&apos;t permitted in the Demo version. Please download and install the evalutation copy to perform this operation..
+        ///   Looks up a localized string similar to This operation isn&apos;t permitted in the Demo version. Please download and install the evaluation copy to perform this operation..
         /// </summary>
         internal static string InvalidDemoOperationMessage {
             get {

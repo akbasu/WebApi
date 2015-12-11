@@ -29,7 +29,7 @@ namespace WebApp.Filters
             if (actionContext.Request.Method != HttpMethod.Get)
             {
                 actionContext.Response = actionContext.Request.CreateResponse(
-                    HttpStatusCode.Forbidden,
+                    HttpStatusCode.Accepted,
                     new
                     {
                         errorCode = ApplicationErrors.InvalidDemoOperation, // Application error codes to help the UI workflow
