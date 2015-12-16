@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="InvalidDemoOperationMessage" xml:space="preserve">
-    <value>This operation isn't permitted in the Demo version. Please download and install the evaluation copy to perform this operation.</value>
+    <value>This operation isn't permitted in the Demo version. Please &lt;a href="http://www.solarwinds.com/" target="_blank"&gt;download&lt;/a&gt; and install the evaluation copy to perform this operation.</value>
   </data>
 </root>
